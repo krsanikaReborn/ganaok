@@ -1,0 +1,28 @@
+[
+    {
+        "group_title" : "멀티보드 비주얼",
+        "group_item" : [
+            {
+                "type" : "radio",
+                "id" : "mboard_visual_visible",
+                "label" : "사용여부 선택",
+                "opt" : {
+                    "사용" : "flex",
+                    "미사용" : "none"
+                }
+            }, {
+                "type" : "file",
+                "id" : "mboard_visual_image",
+                "label" : "이미지"
+            }, {
+                "type" : "file",
+                "id" : "mboard_visual_logo",
+                "label" : "로고"
+            }, {
+                "type" : "text",
+                "id" : "mboard_visual_lead",
+                "label" : "문구"
+            }
+        ]
+    }
+]

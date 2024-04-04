@@ -1,0 +1,402 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.10/vue.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<style>
+
+.po_re {
+    position: relative;
+    top: -2px;
+}
+.add-content {
+   border: 0!important;
+}
+
+.add-header {
+   border-bottom: 0!important;
+}
+
+.add-dialog {
+   margin: 0!important;
+}
+.txt_01 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_02 {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_03 {
+    font-size: 14px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+}
+
+#exhi_image_area {
+    width: 100%;
+    height : 560px;
+    position: absolute;
+    background-size: cover;
+}
+
+#content_box{
+    width : 100%;
+    padding : 25px 20px;
+}
+
+.addTtl {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #121212;
+}
+
+.add-content {
+    border-radius: 16px;
+    border: unset;
+}
+
+.add-header .close {
+    margin: -1rem;
+}
+
+.add-header .add_margin {
+    padding: 1rem 1rem;
+    margin-top: -42px;
+}
+
+.add-header {
+    padding: 21px 1rem;
+    border-bottom: unset;
+}
+
+.add-body {
+    background: #F9F9F9;
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.add-body > div:first-child {
+    padding : 48px;
+}
+
+.add-body > div:first-child > img {
+    box-shadow: 2px 12px 24px 0px #16161640;
+}
+.add-dialog {
+    max-width: 1000px;
+    margin: 0;
+}
+
+.p_48 {
+    padding: 48px 0;
+}
+
+.ic_ar {
+    text-align: right;
+    margin-top: -90px;
+    margin-right: 30px;
+}
+
+.ic_bar {
+    padding: 18px 30px 18px 0;
+}
+.img_txt {
+    position: fixed;
+    color: #fff;
+    padding-top: 410px;
+    padding-left: 20px;
+    text-align: left;
+    z-index : 4;
+}
+
+.img_txt02 {
+    text-align: center;
+    background: #EE5529;
+    width: 60px;
+    font-size: 10px;
+}
+
+.img_txt03 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.img_txt04 {
+    font-size: 14px;
+    font-weight: 500;
+}
+.addTxt {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    color: #333;
+}
+
+
+.bc_F9F9F9 {
+    background: #F9F9F9;
+}
+.square_swiper .swiper-slide {
+    width: 100px;
+}
+
+.square_swiper .swiper-slide img {
+    height: 100px;
+}
+
+.pd_20_0{
+    padding : 20px 0px;
+}
+
+.txt_04 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    text-align: left;
+    width: 90px;
+    min-height: 50px;
+    max-height: 33.6px;    
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis; 
+}
+
+.txt_05 {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    width: 90px;
+    text-overflow: ellipsis;
+    min-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.hp_mb42 {
+    margin-bottom: 42px;
+}
+.bl_shareBtn {
+    width: 100%;
+    height: auto;
+    min-height: 56px;
+    text-align: center;
+    background-color: #121212;
+}
+.bl_btnText{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: #fff;
+    letter-spacing: 0.04em;
+    padding-left: 8px;
+}
+
+#enter_exhi_box{
+    text-align : center;
+    padding : 20px 12px;
+    margin-top : 20px;
+}
+
+.grey_screen{
+    background-color: rgba(0, 0, 0, 0.5);
+    width : 100%;
+    height : 100%;
+    position : absolute;
+    z-index : 2;
+}
+
+</style>
+
+
+<section id="app" class="container-fluid mx-0 px-0">
+    <div style="height:560px;">
+        <div id='exhi_image_area' class="col fs_14 px-0" :style="'background-image : url('+exhibition.img+')'">
+            <div class="grey_screen"></div>
+        </div>
+        <div v-show=exhibition.isDisplay class="img_txt">
+            <div class="img_txt02 mb_4">On going</div>
+            <div class="img_txt03">{{ exhibition.mm_title | splitByFirstSpace(1) }}</div>
+            <div class="img_txt03 mb_4">{{ exhibition.mm_title | splitByFirstSpace(2)}}</div>
+            <div class="img_txt04">{{ exhibition.form[0].exhibitionStart | slice10 }} - {{ exhibition.form[1].exhibitionEnd | slice10 }}</div>
+        </div>
+    </div>
+    <div id="content_box">
+        <!--
+        <div class="txt_r dp_f jc_e" onclick="user.toShare()">
+            <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_share.svg" class="img-fluid pr_10 c_pointer">
+        </div>  
+        -->      
+        <div class="add-dialog">
+            <div class="addTxt">
+                    {{exhibition.mm_title}}
+            </div>
+            <div class="fs_14 mt_8 fw_500">
+                <span>전시 기간 | </span> 
+                <span>{{  exhibition.form[0].exhibitionStart | slice10 }} - {{ exhibition.form[1].exhibitionEnd | slice10}}</span>
+            </div>
+ 
+        <div class="pd_20_0 txt_03" v-html="$options.filters.nl2br(exhibition.mm_content)">
+        </div>
+
+        <div class="row pd_20_0">
+            <div v-show="arts.length > 0" class="col fs_14 dp_f jc_b">
+                <div>
+                    <strong>전시 중인 작품</strong>
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                    <span class="c_828282">ON GOING ARTWORKS</span>
+                </div>
+                <div>
+                    <a href="/page/?M2_IDX=27231&mode=now">
+                        <span class="c_828282 fs_12">더보기</span>
+                        <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_nxt.png" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mx-0">
+            <div id="currently_swiper" class="swiper square_swiper pl_5px">
+                <div class="swiper-wrapper">
+                    <template v-for="item in arts">
+                        <div :id="'art'+item.idx" class="swiper-slide">
+                            <div class="txt_c">
+                                <a :href="'/page/?M2_IDX=27232&code='+item.mi_code">
+                                    <img :src="item|smallImg" class="img-fluid">
+                                    <div class="txt_04 pt_14">{{ item.mi_title }}</div>
+                                    <div v-if="item.author != undefined" class="txt_05 c_828282 pt_2">{{item.author[0].ma_name}}</div>
+                                </a>
+                            </div>
+                        </div>    
+                    </template>
+                </div>
+            </div>
+        </div>   
+
+        <div v-show="exhibition.isDisplay" id="enter_exhi_box" class="bc_F9F9F9 fs_14 c_828282">
+            <div class="fw_600" style="margin-bottom : 16px;">가상 전시관에 입장해 추첨권을 획득하세요.</div>
+            <button class="bl_shareBtn">
+                <div @click="enterArHall">
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_enter.svg" class="img-fluid">
+                    <span class="bl_btnText">가상 전시 입장</span>
+                </div>
+            </button>
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
+<script>
+        
+        let app = new Vue({
+        el : "#app",
+        name : "ExhibitionDetail",
+        data : {
+            exhibition : null,
+            arts : [], // 작가들
+        },
+    
+        methods : {    
+            getArts () {
+                const code = util.getParamFromUrl('code');
+                const pr = util.getFromApi('/app/mission.master.nx', {use_sub : "Y", form_yn : "Y", code : code, author_yn : "Y"});
+                pr.then(result => {
+                    for(sub of result.items[0].sub){
+                        for(msItem of sub.ms_item){
+                            // //바마아트마켓 대응 하드코딩
+                            // if(/59|60|61/i.test(msItem.idx)){
+                            //     continue;
+                            // }                            
+                            this.arts.push(msItem);
+                        }
+                    }
+                    const now = new Date();
+                    const sdate = new Date(result.items[0].form[0].exhibitionStart);
+                    const edate = new Date(result.items[0].form[1].exhibitionEnd);
+                    result.items[0].isDisplay = sdate < now && now < edate ? true : false;
+                    this.exhibition = result.items[0];
+                    console.log("EXHIBITION :", this.exhibition);
+                    console.log("CURRENTLY : ", this.arts);
+                });
+
+            },
+    
+            init () {
+                var smallSwipers = new Swiper("#currently_swiper", {
+                    allowTouchMove : true,
+                    slidesPerView: 'auto',
+                    spaceBetween: 14,
+                });                
+            },
+            
+            enterArHall (){
+                let idRoom = app.exhibition?.sub[0].idx;
+                if(idRoom != undefined){
+                    vu.send('arshowroom', 10004, "room"+idRoom);
+                }else{
+                    //전시관이 없는경우
+                    console.log("This Exhibition don't have Gallery.");
+                }
+            },
+        },
+    
+        filters : {
+            slice10 : (value)=>{
+                return value.slice(0,11);
+            },
+            nl2br : (value)=> {
+                return value.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            },
+            splitByFirstSpace : (value, id)=>{
+                const pos = value.indexOf(" ");
+                const first = value.substring(0, pos);
+                const second = value.substring(pos+1, value.length);
+                if(id == 1){
+                    return first;
+                }else{
+                    return second;
+                }
+            },
+            smallImg : (item)=>{
+                return item.img_list ? item.img_list : util.imgTo100(item.img);
+            }                             
+        },        
+        mounted () {
+            this.getArts();
+        },
+    
+        updated() {
+            this.$nextTick(()=> {
+                this.init();
+            });
+        }
+    
+    });
+
+
+</script>

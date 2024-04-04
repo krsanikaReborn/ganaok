@@ -1,0 +1,462 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.10/vue.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+
+.po_re {
+    position: relative;
+    top: -2px;
+}
+.add-content {
+   border: 0!important;
+}
+
+.add-header {
+   border-bottom: 0!important;
+}
+
+.add-dialog {
+   margin: 0!important;
+}
+.txt_01 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_02 {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_03 {
+    font-size: 14px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+}
+
+#myadd {
+    width: 100%;
+    padding : 0 20px;
+}
+
+.addTtl {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #121212;
+}
+
+.add-content {
+    border-radius: 16px;
+    border: unset;
+}
+
+.add-header .close {
+    margin: -1rem;
+}
+
+.add-header .add_margin {
+    padding: 1rem 1rem;
+    margin-top: -42px;
+}
+
+.add-header {
+    padding: 21px 1rem;
+    border-bottom: unset;
+}
+
+.add-body {
+    background: #F9F9F9;
+    width: 100%;
+    min-height : 340px;
+    padding : 40px; 
+    position: relative;
+}
+
+#canvas_box{
+/*    
+    box-shadow: 2px 12px 24px 0px #16161640;
+*/    
+}
+
+#canvas {    
+
+    background-size : cover;
+}
+
+.add-dialog {
+    max-width: 1000px;
+    margin: 0;
+}
+
+.p_48 {
+    padding: 48px 0;
+}
+
+.ic_ar {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.ic_bar {
+    padding: 18px 30px 18px 0;
+    position: relative;
+}
+
+.addTxt {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    color: #333;
+}
+
+.bc_F9F9F9 {
+    background: #F9F9F9;
+}
+
+.hp_mb42 {
+    margin-bottom: 42px;
+}
+.bl_shareBtn {
+    width: 100%;
+    height: auto;
+    min-height: 56px;
+    text-align: center;
+    background-color: #121212;
+}
+.bl_btnText{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: #fff;
+    letter-spacing: 0.04em;
+    padding-left: 8px;
+}
+
+#like_heart_box{
+    height : 36px;
+    line-height : 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#like_heart{
+    background-image : url('https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_heart_off.svg');
+    width : 24px;
+    height : 24px;
+}
+
+#like_heart.active{
+    background-image : url('https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_heart_on.svg') !important;
+    background-repeat: no-repeat;
+    background-size: 24px 18px;
+    background-position: 0px 4px;
+}
+
+
+#like_count{
+    font-family: 'Pretendard';
+    position: absolute;
+    width: 40px;
+    text-align: center;
+    top: 42px;
+}
+
+#enter_exhi_box{
+    text-align : center;
+    padding : 20px 12px;
+    margin-top : 20px;
+}
+
+.popup {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background : rgba(0,0,0,0.7);
+    position: fixed;
+    z-index:20;
+    top: 0;
+    left: 0;
+}
+ 
+.popup_content{
+    background: #fff;
+    padding: 30px;
+    width: 50%;
+}
+.popup.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#recomm_login{
+    width : 334px;
+    height : 322px;
+    border-radius: 30px;
+    background-color: white;    
+    text-align: center;
+}
+
+.popup_content > .close {
+    position: relative;
+    text-align: right;
+    z-index : 5;
+}
+
+.w_70{
+    width : 70px;
+}
+
+</style>
+
+<section id="app">
+
+    <div class="add-content">
+        <!-- add body -->
+        <div class="add-body">
+            <div id="canvas_box">
+                <img :src="art.img">
+                <!--
+                <div id="canvas" :style="'background-image: url('+art.img+');'" class="img-fluid"></div>
+                -->
+            </div>
+            <div class="ic_ar" @click="vpsButton(art.img)">
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_ar.svg" class="img-fluid c_pointer">
+            </div>
+        </div>
+        <div>
+            <div class="txt_r ic_bar dp_f jc_e">
+                <!--
+                <img @click="toShare()" src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_share.svg" class="img-fluid pr_10 c_pointer">
+                -->
+                <div @click="postLike" id="like_heart_box">
+                    <div v-if="art.my_like_yn == 'Y' && this.isLogin" id="like_heart" class="active img-fluid pr_10 c_pointer"></div>
+                    <div v-else id="like_heart" class="img-fluid pr_10 c_pointer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- The add -->
+    <div class="add fade show" id="myadd" style="display: block; overflow: hidden;">
+        <div class="add-dialog">
+            <div class="addTxt">
+                    {{art.mi_title}}
+            </div>
+            <div class="fs_14 mt_8 fw_500">
+                <span>{{art.author[0].ma_name}}</span>
+                <!--
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                <span class="c_828282">&nbsp;</span>
+                -->
+            </div>
+            <template v-show="art.form.length">
+                <div class="fs_14 fw_600 c_4F4F4F pt_20 pb_4">Note.</div>            
+                <div class="bc_F9F9F9 p_8_12 fs_14 c_828282">
+                    <table style="width:100%">
+                        <tr>
+                            <th class="fw_600 w_70 mr_16">
+                                가격
+                            </th>
+                            <td class="fw_400">
+                                {{art.form[7].price | won3Comma}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="fw_600 w_70 mr_16">
+                                크기
+                            </th>
+                            <td class="fw_400">
+                                {{art.form[8].canvasSize}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="fw_600 w_70 mr_16">
+                                기법
+                            </th>
+                            <td class="fw_400">
+                                {{art.form[1].touch}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="fw_600 w_70 mr_16">
+                                제작년도
+                            </th>
+                            <td class="fw_400">
+                                {{art.form[2].painted | sliceYear}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </template>
+            <div class="pt_24 txt_03" v-html="$options.filters.nl2br(art.mi_content)">
+            </div>
+
+            <div v-show="art.mi_longitude != ''" id="enter_exhi_box" class="bc_F9F9F9 fs_14 c_828282">
+                <div class="fw_600" style="margin-bottom : 16px;">작품 위치를 확인하여 방문하세요.</div>
+                <button class="bl_shareBtn" @click="goToMap()">
+                    <div>
+                        <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_pos.svg" class="img-fluid">
+                        <span class="bl_btnText">작품 위치 보기</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div style="height:100px">
+    </div>
+</section>
+
+<section class="popup">
+    <div id="recomm_login" class="popup_content">
+        <div id="recomm_login_close" class="close" onclick='popupClose()'>
+            <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_close.png">
+        </div>
+        <div class="addTxt" style="padding-top:50px">로그인이 필요한 서비스입니다.</div>
+        <div class="txt_03" style="padding-top:30px">OKNP에 로그인,<br>또는 회원가입을 진행해 주세요.</div>
+        <button onclick="user.toLoginRequired()" class="bl_shareBtn" style="color:white; margin-top:50px">시작하기</button>
+    </div>
+</section>
+
+<script>
+    let app = new Vue({
+        el : "#app",
+        name : "ArtDetail",
+        data : {
+            isLogin : false,
+            code : null,
+            art : null, // 작가들
+        },
+    
+        methods : {
+            getArt () {
+                const req = {
+                    code : this.code, 
+                    form_yn : 'Y', 
+                    author_yn : "Y"                 
+                };
+                if(util.getCookie('isLogin') == 'Y'){
+                    this.isLogin = true;
+                    req.nx_SESS_ID = util.getSessionId();
+                }
+                const pr = util.getFromApi('/app/mission.item.nx', req);
+
+                pr.then(result => {                    
+                    this.art = result.items[0];
+                    console.log('ART :', this.art);
+                });
+            },
+
+            init () {
+                $('#header').after($('.popup'));
+
+                setTimeout(()=>{
+                    $('.add-body').css({minHeight: $('#canvas_box').height()+80});
+                }, 500);
+                $('#header > strong').html(app.art.mi_title);
+
+                //캔버스 비율확보
+//                this.setCanvasRatio();
+
+                //vps갓다올떄 뒤로가기 처리
+                if(window.history.length < 2){
+                    $('#icon_back').click(()=>{location.href="/"});
+                }
+                
+            },
+
+            setCanvasRatio() {
+                const $img = $('<img>').attr({src : this.art.img, id : 'dummyImg'} ).css({opacity : 0});
+                $('body').append($img);
+
+                $img.load(()=>{
+                    const ratio = $('#dummyImg').width() / 280;
+                    const height = $('#dummyImg').height() / ratio;
+                    $('#canvas').css({height : height});
+                    $('#dummyImg').remove();
+                })
+            },
+            
+            postLike(){
+                if(util.getCookie('isLogin') !== 'Y'){
+                    $('.popup').addClass('show').fadeIn();
+                    return;
+                }
+                const mode = this.art.my_like_yn == "N" ? "insert" : "delete";
+                const pr = util.getFromApi('/app/mission.item.like.nx', {mi_code: util.getParamFromUrl('code'), nx_SESS_ID : util.getSessionId(), mode : mode})
+                .then(r=>{
+                    console.log("LIKE :" + JSON.stringify(r));
+                    if(mode == 'insert'){
+                        this.art.my_like_yn = "Y";
+                        $('#like_heart').addClass('active');
+                    }else{
+                        this.art.my_like_yn = "N";
+                        $('#like_heart').removeClass('active');
+                    }
+                });
+            },
+
+            toShare(){
+                user.toShare();
+            },
+                
+            vpsButton(img) {
+                vu.send('vps', 10002, img);
+            },
+
+            goToMap() {
+                location.href='/page/?M2_IDX=28218&lat='+this.art.mi_latitude+'&long='+this.art.mi_longitude;
+            }
+        },
+
+        filters: {
+            sliceYear : (value)=>{
+                return value.slice(0, 4);
+            },
+            nl2br : (str)=> {
+                return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            },
+
+            won3Comma : (str) => {
+                if(Number.isInteger(str)){
+                    str = str.toString();
+                }
+                return "￦"+(str.replace(/\B(?=(\d{3})+(?!\d))/g, ','));        
+            }
+            
+        },
+        mounted () {
+            this.code = util.getParamFromUrl('code');
+            this.getArt();
+        },
+        
+        updated() {
+            this.$nextTick(()=> {
+                this.init();
+            });
+        }
+
+    });
+
+
+    const popupClose = () => {
+        $('.popup').fadeOut();
+    }
+
+</script>

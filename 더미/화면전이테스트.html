@@ -1,0 +1,50 @@
+<style>
+    input { border : black 2px solid;}
+</style>
+
+<h1>전이테스트 A 페이지</h1>
+
+값 들어오기 <br>
+(쿼리스트링 분해. url?key1=value1&key2=value2...)<br><br>
+<div id="input">
+
+</div>
+
+값 나가기
+<div id="output">
+    <input id="msg" type="text">
+    <button value="Say hello" onClick="gotoPageWithMessage()" style="width:100px; height:50px;">
+        화면전이테스트B로 보내기
+    </button>
+    
+</div>
+
+
+
+<script type="text/javascript">
+let inputValues = [];
+$(()=>{
+    let search = location.search.substring(1);
+    let object = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+    console.log(object);
+    for(key in object){
+        if(key == "M2_IDX") continue;
+        var $keyvalue = $('<div>').html(key+" : "+object[key]);
+        $('#input').append($keyvalue).append($('<br>'));
+        inputValues[key] = object[key];
+    }
+
+    $('.preview-btm1').remove();
+    $('div[data-id=tab_outer]').remove();
+    $('header, footer').remove();
+})
+
+function gotoPageWithMessage(){
+    let msg = document.getElementById('msg').value;
+    inputValues["msg"] = msg;
+    var payloadString = Object.entries(inputValues).map(e => e.join('=')).join('&');
+    console.log(payloadString);
+    location.href="https://preview-gana_test.olly.kr/page/?M2_IDX=26642&"+payloadString;
+}
+
+</script>

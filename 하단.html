@@ -1,0 +1,24 @@
+<script type="text/javascript">
+
+    $(() => {
+        $('body').height($('.bg_img').height());
+        //스케일 계산
+        let scale= screen.width / 360;
+        console.log(scale);
+        $('body').css({transform : 'scale('+scale+')'});
+         
+        let $footer = $('footer');
+        let $header = $('#header');
+        $('body').before($header).append($footer);
+  
+        //qna 화면이 너무 길 때 카테고리창 출현 금지
+        if(location.href.includes('27185')){
+            $('.category-m').remove();
+            $('.search').remove();
+        }   
+    });
+        
+   
+        
+        
+</script>

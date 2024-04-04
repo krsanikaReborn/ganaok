@@ -1,0 +1,226 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.10/vue.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+
+    .txt_06 {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 14.4px;
+        color: #4F4F4F;
+    }
+
+    .txt_07 {
+        color: #333333;
+        opacity: 0.8;
+        font-weight: 400;
+        line-height: 150%;
+    }
+
+    .txt_08 {
+        font-size: 14px !important;
+        color: #4F4F4F;
+        opacity: 0.8;
+        font-weight: 600;
+        line-height: 150%;
+    }
+
+    .txt_08 {
+        color: #333333;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 120%;
+    }
+
+    .wb_all {
+        word-break: break-all;
+    }
+
+    .bc_F9F9F9 {
+        background: #F9F9F9;
+    }
+
+    .img_txt {
+        position: fixed;
+        color: #fff;
+        padding-top: 300px;
+        padding-right: 150px;
+        text-align: left;
+    }
+
+    .pd_0_20 {
+        padding: 0 20px;
+    }
+
+    .pl_5px {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .mr_1rem{
+        margin-right: 1rem;
+    }
+    .mx_0{
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .wrapper{
+        display: flex;
+        flex-wrap : wrap;
+    }
+    .wrapper > div:nth-child(3n+2){
+        margin : 0px 10px; 
+    }
+
+    .wrapper_img{
+        width : 100px;
+    }
+
+    .img-fluid{
+        width: 100px;
+        height : 100px;
+    }
+
+
+    .img{
+        vertical-align: middle;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .addLine{
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .addBlock{
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+        position: relative;
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .p_0{
+        padding: 0 !important;
+    }
+    .m_0_20{
+        margin: 0 20px !important;
+    }
+    .pb_32{
+        padding-bottom: 32px !important;
+    }
+
+    #artist_img{
+        background-size: 375px 323px;
+        height: 323px;        
+    }
+
+    .bgImg_01{
+        height : 100px;
+        background-size : cover;
+    }
+</style>
+
+<section id="app">
+
+    <div class="container-fluid m_0 p_0 pb_32">
+        <div class="addLine">
+            <div class="addBlock fs_14">
+                <div id="artist_img" class="w_100p img" :style="'background-image:url('+ author.img +')' "></div>
+            </div>
+        </div>
+    </div>
+    <div class="addLine txt_l pd_0_20 mb_24">
+        <div class="addBlock txt_08 m_0_20 p_0">
+           {{author.ma_name}}
+        </div>
+    </div>
+    <div class="addLine txt_l pd_0_20 mb_4">
+        <div class="addBlock txt_08 m_0_20 p_0">
+            Artist INFO.
+        </div>
+    </div>
+    <div class="addLine txt_l pd_0_20">
+        <div v-html="$options.filters.nl2br(author.ma_info)" class="addBlock fs_14 bc_F9F9F9 m_20 mb-5 txt_07 wb_all mt_4 pt_10 pb_10">
+        </div>
+    </div>
+    
+    <div class="pb_16 mx_0">
+        <div class="pl_5px">
+            <div class="wrapper">
+                <template v-for="item of arts">
+                    <div class="wrapper_img">
+                        <a :href="'/page/?M2_IDX=27232&code='+item.mi_code">
+                            <div class="txt_l">
+                                <div class="img bgImg_01">
+                                    <img :src=item|smallImg class="img-fluid">
+                                </div>
+                                <div class="txt_06 pt_8 mh_35">{{item.mi_title}}</div>
+                                <div style="min-height:16px;" class="txt_05 c_828282 pt_2"> </div>
+                            </div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+let app = new Vue({
+    el : '#app',
+    name : "ArtistDetail",
+    data : {
+        code : null,
+        author : null,
+        arts : [],
+    },
+    methods : {
+        getAuthor () {
+            const pr = util.getFromApi('/app/mission.author.nx', {code : this.code});      
+            pr.then(result => {
+                this.author = result.items[0];   
+                $("#header > strong").html(result.items[0].ma_name);             
+            });
+        },
+
+        getArts() {
+            const code = util.getParamFromUrl('code');
+            const pr = util.getFromApi('/app/mission.item.nx', { "author_code" : code});
+            pr.then(result => {
+                this.arts = result.items;
+                console.log("ARTS :", this.arts);
+            });
+        },
+    
+        init () {
+        }
+    },
+    filters: {
+        sliceYear : (value)=>{
+            return value.slice(0, 4);
+        },
+        nl2br : (str)=> {
+            return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+        },
+        smallImg : (item)=>{
+            return item.img_list ? item.img_list : util.imgTo100(item.img);
+        }
+    },
+    mounted () {
+        this.code = util.getParamFromUrl('code');
+        this.getAuthor();
+        this.getArts();
+        this.$nextTick(()=> {
+            this.init();
+        });
+    },
+    
+    updated() {
+    }    
+});
+</script>

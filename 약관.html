@@ -1,0 +1,264 @@
+<style>
+    * {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-color: inherit;
+    }
+
+    #cs_menu_01 a {
+        color: #333333;
+    }
+
+    #section1 {
+        left: 0;
+        padding: 0 20px;
+    }
+
+    .d-flex.pt_20px {
+        padding-top: 10px;
+    }
+
+    .form-control {
+        background: #FFFFFF;
+        border: 1px solid #DBDADA;
+        border-radius: 6px;
+        padding: 14px 20px;
+        height: 44px;
+        font-size: 12px;
+    }
+
+    .form-control.mr_30px {
+        margin-right: 10px;
+    }
+
+    .aco_dt {
+        padding: 20px 20px;
+    }
+
+    .aco_dt {
+        background-size: 20px;
+        font-weight: 400;
+        border-bottom: 2px solid #EDF2EA;
+        background-image: url(https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_down.svg);
+        background-position-y: 50%;
+        background-position-x: calc(100% - 10px);
+        background-repeat: no-repeat;
+    }
+
+    .aco_dt.on {
+        background-image: url(https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_up.svg);
+    }
+
+    .aco_dd {
+        background: #F7F7F7;
+        display: none;
+        max-height : 500px;
+        overflow : scroll;
+    }
+
+    .termArea {
+        min-height : 400px;
+        width : 100%;
+        background-color: #F7F7F7;
+        padding : 20px;
+    }
+
+    .q {
+        font-weight: 700;
+    }
+
+    .bl_shareBtn {
+        width: 100%;
+        height: auto;
+        min-height: 56px;
+        text-align: center;
+        margin-top: 50px;
+        color: white; 
+        background-color : #f7f7f7;
+    }
+
+    .bl_shareBtn.active{
+        background-color: #121212;    
+    }
+
+    .all_agree_area{
+        font-size : 16px;
+        font-weight: 700;
+        margin : 20px 0px;
+        padding : 20px;
+        background-color: #F7F7F7;
+        width : 100%;
+    }
+
+    .checkbox {
+        width : 24px;
+        height : 24px;        
+        float: left;
+        margin-right : 10px;
+        background-image: url('https://ganaart.s3.ap-northeast-2.amazonaws.com/checkbox.svg');
+    }
+
+    .checkbox.active {
+        background-image: url('https://ganaart.s3.ap-northeast-2.amazonaws.com/checkbox_active.svg') !important;
+    }
+</style>
+
+
+<div class="container-fluid pb_100px" id="section1">
+    <div class="row mw_1152 ">
+        <div class="col">            
+            <div class="all_agree_area">
+                <div id="checkAll" class="checkbox" onclick="agreement.agree('all')" data-num="0"></div>
+                모든 약관에 동의합니다.
+            </div>
+            <dl id=originAcodian class="aco_dl pt_20px">
+                <dt class="aco_dt">
+                </dt>
+                <dd class="aco_dd">
+                </dd>    
+            </dl>
+        </div>
+    </div>
+    <button id="agreeBtn" class="bl_shareBtn">확인</button>
+
+</div>
+
+
+<script>
+$(()=>{
+    $('#icon_back').attr('onclick', '').off('click').on('click', ()=>{
+        vu.send('termsCancel', 10012, '');
+    });
+    agreement.init();
+});
+
+let agreement = {
+    slot : { MTA_AGREE_YN_0 : false, MTA_AGREE_YN_1 : false, MTA_AGREE_YN_2 : false, MTA_AGREE_YN_3 : false},
+    terms : null,
+
+    watchScroll : () => {
+        $('.aco_dd').scroll(()=>{
+            let scrT = $(this).scrollTop();
+            if(scrT * $(this).innerHeight() >= $(this)[0].scrollHeight){
+                agree($(this).attr('data-num'));
+            }
+        });
+    },
+
+    init : () => {
+        let agreeData = util.getFromApi('/app/memb.agree.nx', {kind : 'A'})
+            .then(r => {
+                agreement.terms = r.terms.reverse();
+                $origin = $('#originAcodian');
+                $.each(agreement.terms, (i, term)=>{
+                    let $acoDt = $('<dt>').addClass('aco_dt').attr('id', term.name);
+                    let checkText = (term.req_yn == 'Y' ? "[필수] " : "[선택] ") + term.title;
+                    let $check = $('<div>').attr({id: 'check'+term.name}).addClass('checkbox').click(()=>{
+                        agreement.agree(term.name)
+                    });
+                    $acoDt.append($check, checkText);
+                    let $acoDd = $('<dd>').addClass('aco_dd').attr('data-num', term.name);
+                    $acoDd.append($('<div>').addClass('termArea d-flex').html(term.content));
+                    $origin.after($acoDt, $acoDd);
+                });
+                $origin.remove();
+                acodian.addClickListener('dt');
+//                $('dt').first().trigger('click');
+            });        
+    },
+
+    toggleBtn : (name)=>{
+        agreement.slot[name] = agreement.slot[name] ? false : true;
+//        console.log(agreement.slot);
+        $('#check'+name).toggleClass('active');
+    },
+
+    getRequisiteCount : ()=>{
+        let count = 0;
+        for(term of agreement.terms){
+            if(term.req_yn =='Y'){
+                count++;
+            }
+        }
+        return count;
+    },
+
+    agree : (name)=>{
+        event.stopPropagation();
+
+        if(name == 'all'){
+            for(key in agreement.slot){
+                agreement.toggleBtn(key);
+            }
+            $('#checkAll').toggleClass('active');        
+        }else{
+            agreement.toggleBtn(name);
+        }
+
+        let currentCount = 0;
+        for(key in agreement.slot){
+            if(agreement.slot[key] && agreement.terms.find(e=>e.name == key).req_yn == 'Y'){
+               currentCount++;
+            }
+        }
+
+        if(currentCount >= agreement.getRequisiteCount()){   
+            $('#agreeBtn').off('click').on('click', agreement.toAgree).addClass('active');
+        }else{
+            $('#agreeBtn').off('click').removeClass('active');
+        }
+    },
+
+    toAgree : ()=>{
+        let options = {};
+        for(key in agreement.slot){
+            if(agreement.slot[key]) options[key] = 'Y';
+            else options[key] = 'N';
+        }
+        options.nx_id = util.getCookie('id');
+        options.nx_SESS_ID = util.getSessionId();
+        options.kind = 'A';
+        // console.log(options);
+        const agreeProc = util.getFromApi('/app/memb.agreeProc.nx', options)
+            .then(r=>{
+                console.log(JSON.stringify(r));
+                const isMarketing = agreement.slot[5] ? 1 : 0;        
+                vu.send('registerAgree', 10011, '', {
+                    terms : options.MTA_AGREE_YN_0,
+                    privacy : options.MTA_AGREE_YN_1,
+                    location : options.MTA_AGREE_YN_2,
+                    marketing : options.MTA_AGREE_YN_3,
+                    versionCode : 1
+                });
+            });
+    }
+
+};
+
+var acodian = {
+
+    addClickListener: function (target) {
+        var _self = this,
+            $target = $(target);
+        $target.on('click', function () {
+            var $this = $(this);
+            if ($this.next($(".aco_dd")).css('display') == 'none') {
+                $(".aco_dd").slideUp();
+                _self.onremove($target);
+
+                $this.addClass('on');
+                $this.next().slideDown();
+            } else {
+                $(".aco_dd").slideUp();
+                _self.onremove($target);
+            }
+        });
+    },
+    onremove: function ($target) {
+        $target.removeClass('on');
+    }
+
+};
+</script>

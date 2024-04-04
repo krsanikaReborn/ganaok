@@ -1,0 +1,164 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.10/vue.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+    .txt_05 {
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 15px;
+        text-align: left;
+        width: 90px;
+        text-overflow: ellipsis;
+        min-height: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .txt_06 {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 14.4px;
+        color: #4F4F4F;
+    }
+
+    .wb_all {
+        word-break: break-all;
+    }
+
+    .bc_F9F9F9 {
+        background: #F9F9F9;
+    }
+
+    .p_30 {
+        padding: 30px 12px 16px;
+    }
+
+    .img_txt {
+        position: fixed;
+        color: #fff;
+        padding-top: 300px;
+        padding-right: 150px;
+        text-align: left;
+    }
+
+    .img_txt02 {
+        text-align: center;
+        background: #EE5529;
+        width: 60px;
+        font-size: 10px;
+    }
+
+    .img_txt03 {
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .img_txt04 {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .pd_60_20_14 {
+        padding: 60px 20px 14px;
+    }
+
+    .pd_0_20_32 {
+        padding: 0px 20px 32px;
+    }
+
+    .pd_0_20 {
+        padding: 0 20px;
+    }
+
+    .pd_24_20_14_5 {
+        padding: 24px 20px 14px 5px;
+    }
+
+
+    .pl_5px {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .mt_86{
+        margin-top : 86px;
+    }
+
+    .wrapper{
+        display: flex;
+        flex-wrap : wrap;
+    }
+    .wrapper > div:nth-child(3n+2){
+        margin : 0px 10px; 
+    }
+
+    .wrapper_img{
+        width : 100px;
+    }
+
+    .img-fluid{
+        width: 100px;
+        height : 100px;
+    }
+</style>
+
+<section id="app">
+    <div class="pb_16 mx_0 of_g">
+        <div class="pl_5px">
+            <div class="wrapper">
+                <template v-for="item in authors">
+                    <div :id="'author'+item.idx" class="wrapper_img">
+                        <a :href="'/page/?M2_IDX=27216&code='+item.ma_code">
+                            <div class="txt_l">
+                                <img :src=item.img|smallImg class="img-fluid">
+                                <div class="txt_06 pt_8 mh_35">{{item.ma_name}}</div>
+                            </div>
+                        </a>
+                    </div>    
+                </template>
+            </div>
+        </div>
+    </div>    
+</section>
+
+<script>
+        
+    let app = new Vue({
+        el : "#app",
+        name : "app",
+        data : {
+            authors : [], // 작가들
+        },
+    
+        methods : {    
+            get_authors () {
+                const pr = util.getFromApi('/app/mission.author.nx', null);
+                pr.then(result => {
+                    this.authors = result.items;
+                    console.log("AUTHORS :", this.authors);
+                })
+            },
+    
+            init () {
+            }
+        },
+
+        filters : {
+            smallImg : (value)=>{
+                return util.imgTo100(value);
+            }
+        },
+    
+        mounted () {
+            const _this = this;
+            _this.get_authors();
+        },
+    
+        updated() {
+            const _this = this;
+            _this.$nextTick(()=> {
+                _this.init();
+            });
+        }
+    
+    });
+    </script>

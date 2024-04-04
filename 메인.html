@@ -1,0 +1,698 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<style>
+    .txt_01 {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16.8px;
+        text-align: left;
+        width: 110px;
+        margin: auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .txt_02 {
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 15px;
+        text-align: left;
+        width: 110px;
+        margin: auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .txt_04 {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16.8px;
+        text-align: left;
+        width: 90px;
+        min-height: 50px;
+        max-height: 33.6px;    
+        overflow: hidden;
+        position: relative;
+        text-overflow: ellipsis; 
+    }
+
+    .txt_05 {
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 15px;
+        text-align: left;
+        width: 90px;
+        text-overflow: ellipsis;
+        min-height: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .bc_F9F9F9 {
+        background: #F9F9F9;
+    }
+
+    .login_btn {
+        background: #333333;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 16px;
+        width: 100%;
+        margin: 0 0 12px 0;
+    }
+
+    .p_30 {
+        padding: 30px 12px 16px;
+    }
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 320px;
+        height: 100%;
+        /* object-fit: cover; */
+    }
+
+    #lastest_swiper .swiper-slide-prev,
+    #lastest_swiper .swiper-slide-next {        
+         /* animation : gotoHeight380 0.5s ease forwards;  */
+    }
+
+    #lastest_swiper .swiper-slide-active {
+        /* animation : gotoHeight480 0.5s ease forwards;  */
+    }
+
+    @keyframes gotoHeight480 {
+        from   { width : 300px; height : 380px;}
+        to     { width : 300px; height : 480px;}        
+    }
+    @keyframes gotoHeight380 {
+        from { width : 300px; height : 480px;}
+        to   { width : 300px; height : 380px;}
+    }
+
+    #lastest_swiper {
+        width: 620px;
+        height : 480px;
+        margin-left: -140px;
+    }
+
+    #my_collection_swiper{
+     /*   min-height: 148px; */
+    }
+
+    #my_collection_not_exist{
+        display : flex;
+        justify-content: center;
+        align-items: center;
+        width : 100%;
+        height : 80px;
+        background-color : #F9F9F9;
+        color : #333333;
+        font-size : 14px;
+    }
+
+
+/*
+    #my_collection_swiper .swiper-slide
+    {
+        width: 110px;
+        height: auto;
+    }
+
+    #my_collection_swiper .swiper-slide img
+    {
+        height: 110px;
+    }
+*/
+    .square_swiper .swiper-slide {
+        width: 100px;
+    }
+
+    .square_swiper .swiper-slide img {
+        height: 100px;
+    }
+
+
+    .swiper-pagination {
+        margin-bottom: -46px;
+    }
+
+    .swiper-pagination > .swiper-pagination-bullet-active {
+        top: 1px;
+        background: #050402 !important;
+        width: 8px !important;
+        height: 8px !important;
+        position: relative;
+    }
+
+    .swiper-pagination >.swiper-pagination-bullet {
+        width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 6px));
+        height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 6px));
+        background: #999999;
+        opacity: 1;
+    }
+
+    .swiper-pagination .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+    .swiper-pagination .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 2px);
+    }
+
+
+    .img_txt {
+        position: fixed;
+        color: #fff;
+        padding-top: 300px;
+        padding-right: 115px;
+        text-align: left;
+        z-index: 4;
+    }
+
+    .img_txt02 {
+        text-align: center;
+        background: #EE5529;
+        width: 60px;
+        font-size: 10px;
+    }
+
+    .img_txt02_1 {
+        text-align: center;
+        background: #333333;
+        width: 60px;
+        font-size: 10px;
+    }
+
+
+    .img_txt03 {
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .img_txt04 {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .pd_20_20_14 {
+        padding: 20px 20px 14px;
+    }
+
+    .pd_0_20_32 {
+        padding: 0px 20px 32px;
+    }
+
+    .pd_0_20 {
+        padding: 0 20px;
+    }
+
+    .pd_52_20_14_5 {
+        padding: 52px 20px 14px 5px;
+    }
+
+    .pd_24_20_14_5{
+        padding : 25px 20px 14px 5px;
+    }
+
+    .pl_5px {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .grey_screen{
+        background-color: rgba(0, 0, 0, 0.5);
+        width : 100%;
+        height : 100%;
+        position : absolute;
+        z-index : 2;
+    }
+</style>
+
+<div id="header">
+    <div class="icons"></div>
+    <strong>EXHIBITION</strong>
+    <div class="icons"></div>
+</div>
+
+<div id="app">
+    <div class="container-fluid pt_66">
+        <div class="row pd_24_20_14_5">
+            <div class="col fs_14">
+                <strong>최근 전시들</strong>
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                <span class="c_828282">EXHIBITION</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid mx-0 px-0">
+        <div class="row  mx-0 of_g" style="padding-bottom:40px;">
+            <div id="lastest_area" class="col fs_14 px-0">
+                <div id="lastest_swiper" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <template v-for="item in exihibitions">
+                            <div class="swiper-slide align-self-center" :data-hash="'lastest'+item.idx" @click="goToExhibitionDetail(item.mm_code)">
+                                <div class="grey_screen"></div>
+                                <img :src=item.img class="img-fluid">
+                                <div class="img_txt">
+                                    <div v-if=item.isNow class="img_txt02 mb_4">On going</div>
+                                    <div v-if=item.isUpcoming class="img_txt02_1 mb_4">Upcoming</div>
+                                    <div class="img_txt03">{{ item.mm_title | splitByFirstSpace(1) }}</div>
+                                    <div class="img_txt03 mb_4">{{ item.mm_title | splitByFirstSpace(2)}}</div>
+                                    <div class="img_txt04">{{ item.form[0].exhibitionStart  |slice10 }} - {{ item.form[1].exhibitionEnd | slice10 }}</div>
+                                </div>    
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div id="lastest_swiper-pagination" class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pd_20_20_14"></div>    
+    <div class="row pd_20_20_14">
+        <div class="col fs_14 dp_f jc_b">
+            <div>
+                <strong>내가 찜한 작품</strong>
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                <span class="c_828282">COLLECTION</span>
+            </div>
+            <div class="log_on">
+                <a href="/page/?M2_IDX=27231&mode=my">
+                    <span class="c_828282 fs_12">더보기</span>
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_nxt.png" class="img-fluid">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mx-0 of_g p_0_20 log_on">
+        <div id="my_collection_swiper" class="swiper square_swiper pl_5px">
+            <div class="swiper-wrapper">
+                <template v-if="collection.length > 0">
+                    <template v-for="item in collection">
+                        <div :id="'collection'+item.idx" :data-hash="'collection'+item.idx" class="swiper-slide">
+                            <div class="txt_c">
+                                <a :href="'/page/?M2_IDX=27232&code='+item.mi_code">
+                                    <img :src=item|smallImg class="img-fluid">
+                                    <div v-if="item.form[5].isSoldOut=='Y'" class="soldout">sold out</div>
+                                    <div class="txt_04 pt_14 ">{{item.mi_title}}</div>
+                                    <div class="txt_05 c_828282 pt_2" v-for="a in item.author">
+                                        {{a.ma_name}}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>    
+                    </template>    
+                </template>
+                <div v-else id="my_collection_not_exist">
+                    찜한 작품이 없습니다.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row txt_c pd_0_20 log_off">
+        <div class="col fs_14 bc_F9F9F9 m_20 mb-5">
+            <div class="p_30">로그인하여 내 작품을 모아보세요.</div>
+            <button class="login_btn" onclick="user.toLoginRequired()" >로그인 / 회원가입</button>
+        </div>
+    </div>
+
+    <div class="row pd_20_20_14">
+        <div class="col fs_14 dp_f jc_b">
+            <div>
+                <strong>전시 중인 작품</strong>
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                <span class="c_828282">ON GOING ARTWORKS</span>
+            </div>
+            <div>
+                <a href="/page/?M2_IDX=27231&mode=now">
+                    <span class="c_828282 fs_12">더보기</span>
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_nxt.png" class="img-fluid">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-0 of_g p_0_20">
+        <div id="currently_swiper" class="swiper square_swiper pl_5px">
+            <div class="swiper-wrapper">
+                <template v-for="item in currently">
+                    <!-- v-show="item.isDisplay" -->
+                    <div  :id="'currently'+item.idx" :data-hash="'currently'+item.idx" class="swiper-slide">
+                        <div class="txt_c">
+                            <a :href="'/page/?M2_IDX=27232&code='+item.mi_code">
+                                <img :src=item|smallImg class="img-fluid">
+                                <div v-if="item.form[5].isSoldOut=='Y'" class="soldout">sold out</div>
+                                <div class="txt_04 pt_14 ">{{item.mi_title}}</div>
+                                <div class="txt_05 c_828282 pt_2" v-for="a in item.author">
+                                    {{a.ma_name}}
+                                </div>
+                            </a>
+                        </div>
+                    </div>    
+                </template>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row pd_20_20_14">
+        <div class="col fs_14 dp_f jc_b">
+            <div>
+                <strong>OKNP의 작품</strong>
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                <span class="c_828282">ARTWORKS</span>
+            </div>
+            <div>
+                <a href="/page/?M2_IDX=27231&mode=all" class="">
+                    <span class="c_828282 fs_12">더보기</span>
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_nxt.png" class="img-fluid">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row  mx-0 of_g p_0_20">
+        <div id="host_swiper" class="swiper square_swiper pl_5px">
+            <div class="swiper-wrapper">
+                <template v-for="item in hosts">
+                    <div :id="'host_slide'+item.idx" :data-hash="'host'+item.idx" class="swiper-slide">
+                        <div class="txt_c">
+                            <a :href="'/page/?M2_IDX=27232&code='+item.mi_code">
+                                <img :src=item|smallImg class="img-fluid">
+                                <div v-if="item.form[5].isSoldOut=='Y'" class="soldout">sold out</div>
+                                <div class="txt_04 pt_14 ">{{ item.mi_title}}</div>
+                                <div class="txt_05 c_828282 pt_2" v-for="a in item.author">
+                                    {{a.ma_name}}
+                                </div>
+                            </a>
+                        </div>
+                    </div>    
+                </template>                
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="row pd_20_20_14">
+        <div class="col fs_14 dp_f jc_b">
+            <div>
+                <strong>OKNP의 아티스트</strong>
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                <span class="c_828282">ARTISTS</span>
+            </div>
+            <div>
+                <a href="/page/?M2_IDX=27230">
+                    <span class="c_828282 fs_12">더보기</span>
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_nxt.png" class="img-fluid">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row  mx-0 of_g p_0_20">
+        <div id="artist_swiper" class="swiper square_swiper pl_5px">
+            <div class="swiper-wrapper">
+                <template v-for="item, idx in authors">
+                    <div :id=item.ma_idx :data-hash="'artist'+item.ma_idx" class="swiper-slide">
+                        <div class="txt_c">
+                            <a :href= "'/page/?M2_IDX=27216&code='+item.ma_code">
+                                <img :src=item.img class="img-fluid">
+                                <div class="txt_04 pt_14 ">{{ item.ma_name }}</div>
+                            </a>
+                            <div class="txt_05 c_828282 pt_2"></div>
+                        </div>
+                    </div>    
+                </template>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+<script>
+
+let app = new Vue({
+    el : "#app",
+    name : "app",
+    data : {
+        swiper : [null, null],
+        url : (location.hostname == "localhost" ? "https://preview-gana_test.olly.kr" : ""),
+        key : "vvgb2n0wd3sociqjx1ubl49cdr10suw5",        
+        exihibitions : [], // 전시회 리스트
+        collection : [], //내 컬렉션
+        currently : [], //현재 전시중인 작품
+        hosts : [], // 전시자가 제공하는 전체작품
+        authors : [], // 작가들
+    },
+
+    methods : {
+        //모든 전시회 가져오기
+        getExhibitions () {
+            console.log('GET EXIBITIONS');
+            const pr = util.getFromApi('/app/mission.master.nx', {date_check : "Y", form_yn : "Y"});
+            pr.then(result => {
+                result.items = result.items.reverse();
+                result.items.map((item)=>{
+                    item.form[0].exhibitionStart = item.form[0].exhibitionStart.replace(/-/g, '/');
+                    item.form[1].exhibitionEnd = item.form[1].exhibitionEnd.replace(/-/g, '/');
+                    item.form[0].exhibitionStart += " 00:00";
+                    item.form[1].exhibitionEnd += " 00:00";
+                    const now = new Date();
+                    const sdate = new Date(item.form[0].exhibitionStart);
+                    const edate = new Date(item.form[1].exhibitionEnd);
+                    if( sdate < now && now < edate ){
+                        item.isNow = true;
+                    }
+                    if( now < sdate && now < edate ){
+                        item.isUpcoming = true;
+                    }
+                });
+                this.exihibitions = result.items;                
+            });
+
+        },
+
+        //전시회, 현재 하고있는 작품리스트 가져오기
+        getCurrently () {
+            const pr = util.getFromApi('/app/mission.master.nx', {use_sub : "Y", date_check : "Y", form_yn :"Y", author_yn : "Y"});
+            pr.then(result => {
+                result.items = result.items.reverse();
+                result.items?.map((item)=>{
+                    for(sub of item.sub){
+                        for(msItem of sub.ms_item){
+                            //바마아트마켓 대응 하드코딩
+                            if(/59|60|61/i.test(msItem.idx)){
+                                continue;
+                            }
+                            this.currently.push(msItem);
+                        }
+                    }
+                });  
+            });
+        },
+
+        //나의컬랙션 가져오기
+        getCollection () {
+            if(util.getCookie('isLogin') != 'Y'){
+                this.collection = [];
+                return;                
+            }else{
+                const pr = util.getFromApi('/app/mission.item.nx', {like_yn : "Y", nx_SESS_ID : util.getSessionId(), form_yn : "Y", author_yn : "Y", pa : 1000});
+                pr.then(result => {
+                    if(result.result != 1){
+                        this.collection = [];
+                    }else{
+                        
+                        //바마아트마켓 대응 하드코딩
+                        for(item of result.items){
+                            if(/59|60|61/i.test(item.idx)){
+                               continue;
+                            }
+                            this.collection.push(item);
+                        }
+
+//                    this.collection = result.items;
+                    }
+                }).catch(error=> {
+                    console.error(error);
+                    this.collection = [];
+                });
+            }
+        },
+
+        getAuthors () {
+            const _this = this;
+            const pr = util.getFromApi('/app/mission.author.nx', {pa : 1000});
+            pr.then(result => {
+                _this.authors = result.items;
+            });
+        },
+
+        getHosts () {
+            const pr = util.getFromApi('/app/mission.item.nx', {pa : 1000, form_yn : "Y", author_yn : "Y"});
+            pr.then(result => {
+                //바마아트마켓 대응 하드코딩
+                for(item of result.items){
+                    if(/59|60|61/i.test(item.idx)){
+                        continue;
+                    }
+                    this.hosts.push(item);
+                }                
+//                this.hosts = result.items;
+            });
+        },
+
+        goToExhibitionDetail(code) {
+            // if(isNow) 
+            location.href='/page/?M2_IDX=27237&code='+code;
+        },
+
+        file_url (code) {
+            return this.url + "/form/fileDown.php?s=&code=" + code
+        },
+
+        init () {
+            //메인, 마이일떄 상단타이틀 정가운데 보정 삭제
+            $('#header > strong').css({marginLeft:0});
+
+            //톱니지우기
+            $('#icon_set').css({backgroundImage : 'none'});
+            
+            if ('scrollRestoration' in history) {
+               // Back off, browser, I got this...
+                history.scrollRestoration = 'manual';
+            }
+
+            //스크롤 맨위로
+            window.scrollTo(0,0);
+
+        },
+
+        initSwiper(){
+            /*Initialize Swiper*/
+
+            if(this.swiper[0] == null){
+                let initial = 0;
+
+                // $.each(this.exihibitions, (i, item)=>{
+                //     if(item.isNow){
+                //         initial = i;
+                //         return 0;
+                //     }
+                // });
+                //현재 진행중인걸로 슬라이드 이동            
+                this.swiper[0] = new Swiper("#lastest_swiper", {
+                    initialSlide : initial, //최초위치
+                    slidesPerView: 2,  //슬라이드수
+                    centeredSlides: true, //가운데정렬
+                    spaceBetween: 20, //간격
+                    speed : 1000,  //이동속도
+                    allowTouchMove : true, //터치허가
+                    touchRatio : 2, //터치감도
+                    clickable: false, //클릭거부
+                    observer: true,	//변경감시
+                    observeParents: true,	//부모요소도 감시
+                    pagination: {
+                        el: "#lastest_swiper-pagination",
+                        clickable: true,
+                    },
+                });
+            }
+            if(this.swiper[1] == null){
+                this.swiper[1] = new Swiper(".square_swiper", {
+                    allowTouchMove : true,
+                    slidesPerView: 'auto',
+                    spaceBetween: 14,
+                    loop : false,
+                    speed : 1000,
+                });  
+            }            
+        }
+    },
+
+    computed : {
+        
+    },
+
+    filters : {
+        slice10 : (value)=>{
+            return value.slice(0,10);
+        },
+        splitByFirstSpace : (value, id)=>{
+            const pos = value.indexOf(" ");
+            const first = value.substring(0, pos);
+            const second = value.substring(pos+1, value.length);
+            if(id == 1){
+                return first;
+            }else{
+                return second;
+            }
+        },
+        smallImg : (item)=>{
+            return item.img_list ? item.img_list : util.imgTo100(item.img);
+        }
+    },
+    mounted () {        
+        this.getExhibitions();
+        this.getCurrently();        
+        this.getAuthors();
+        this.getHosts();
+
+        //로그인정보가 있으면 바로 실행
+        if(util.getCookie('isLogin')=='Y'){
+            this.getCollection();
+        }else{
+            window.addEventListener('vuplexready', ()=>{
+            setTimeout(()=>{
+                this.getCollection();
+            }, 400);
+        });
+        }
+
+        setTimeout(this.initSwiper, 400);
+
+        this.$nextTick(()=> {
+            this.init();
+        });
+
+    },
+    
+    updated() {
+        const _this = this;
+        _this.$nextTick(()=> {
+            _this.init();
+        });
+        //스크롤 맨위로
+        window.scrollTo(0,0);
+    }
+
+});
+</script>

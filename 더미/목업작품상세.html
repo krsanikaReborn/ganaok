@@ -1,0 +1,363 @@
+<link rel="stylesheet" href="https://ganaart.s3.ap-northeast-2.amazonaws.com/common.css">
+
+<style>
+
+.po_re {
+    position: relative;
+    top: -2px;
+}
+.add-content {
+   border: 0!important;
+}
+
+.add-header {
+   border-bottom: 0!important;
+}
+
+.add-dialog {
+   margin: 0!important;
+}
+.txt_01 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_02 {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_03 {
+    font-size: 14px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+}
+
+#myadd {
+    width: 100%;
+    padding : 0 20px;
+}
+
+.addTtl {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #121212;
+}
+
+.add-content {
+    border-radius: 16px;
+    border: unset;
+}
+
+.add-header .close {
+    margin: -1rem;
+}
+
+.add-header .add_margin {
+    padding: 1rem 1rem;
+    margin-top: -42px;
+}
+
+.add-header {
+    padding: 21px 1rem;
+    border-bottom: unset;
+}
+
+.add-body {
+    background: #F9F9F9;
+    width: 100%;
+    min-height : 340px;
+    padding : 40px; 
+    position: relative;
+}
+
+
+#canvas_box {
+
+}
+
+#canvas_box > img {
+    box-shadow: 2px 12px 24px 0px #16161640;
+}
+
+
+.add-dialog {
+    max-width: 1000px;
+    margin: 0;
+}
+
+.p_48 {
+    padding: 48px 0;
+}
+
+.ic_play{
+    position: absolute;
+    left: 18px;
+}
+
+.ic_ar {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+.ic_bar {
+    padding: 18px 30px 18px 0;
+    position: relative;
+}
+
+.addTxt {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    color: #333;
+}
+
+.bc_F9F9F9 {
+    background: #F9F9F9;
+}
+
+.hp_mb42 {
+    margin-bottom: 42px;
+}
+.bl_shareBtn {
+    width: 100%;
+    height: auto;
+    min-height: 56px;
+    text-align: center;
+    background-color: #121212;
+}
+.bl_btnText{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: #fff;
+    letter-spacing: 0.04em;
+    padding-left: 8px;
+}
+
+#enter_exhi_box{
+    text-align : center;
+    padding : 20px 12px;
+    margin-top : 20px;
+}
+
+.pd_24{
+    padding-bottom : 24px;
+}
+
+.popup {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background : rgba(0,0,0,0.7);
+    position: fixed;
+    z-index:20;
+    top: 0;
+    left: 0;
+}
+ 
+.popup_content{
+    background: #fff;
+    padding: 30px;
+    width: 50%;
+}
+.popup.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#recomm_login{
+    width : 334px;
+    height : 322px;
+    border-radius: 30px;
+    background-color: white;    
+    text-align: center;
+}
+
+.popup_content > .close {
+    position: relative;
+    text-align: right;
+}
+</style>
+
+<div class="add-content">
+    <!-- add body -->
+    <div class="add-body">
+        <div id="canvas_box">
+            <img id="art" src="https://ganaart.s3.ap-northeast-2.amazonaws.com/dummy/Un+Passage+No.221028%2C+130x162cm%2C+Acrylic+on+Canvas%2C+2022.jpg" class="img-fluid">
+        </div>
+        <div class="ic_ar" onclick="vpsButton()">
+            <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_ar.svg" class="img-fluid c_pointer">
+        </div>
+    </div>
+    <div>
+        <div class="txt_r ic_bar dp_f jc_e">
+            <!--
+            <img onclick="playButton()" src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_play.svg" class="ic_play img-fluid c_pointer">
+            -->
+            <img onclick="toShare()" src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_share.svg" class="img-fluid pr_10 c_pointer">
+            <div onclick="imgToggle()">
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Inactive2.png" id="img1" class="img-fluid pr_10 c_pointer" width="30px">
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Vector.png" id="img2" style="display: none;" class="img-fluid pr_10 c_pointer" width="30px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The add -->
+    <div class="add fade show" id="myadd" style="display: block; overflow: hidden;">
+        <div class="add-dialog">
+            <div>
+            <div class="addTxt">
+                    Un Passage No.221028, 130x162cm, Acrylic on Canvas, 2022
+            </div>
+            <div class="fs_14 mt_8 fw_500">
+                <span>하태임</span>
+                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                <span class="c_828282">1973~ 2099</span>
+            </div>
+            <div class="fs_14 fw_600 c_4F4F4F pt_20 pb_4">Note.</div>
+            <div class="bc_F9F9F9 p_8_12 fs_14 c_828282">
+                <div class="dp_f">
+                    <div class="fw_600 w_50 mr_16">size</div>
+                    <div class="fw_400">130cm x 162cm</div>
+                </div>
+                <div class="dp_f">
+                    <div class="fw_600 w_50 mr_16">기법</div>
+                    <div class="fw_400">유화, 아크릴, 수채, 크리스탈</div>
+                </div>
+                <div class="dp_f">
+                    <div class="fw_600 w_50 mr_16">제작년도</div>
+                    <div class="fw_400">2022</div>
+                </div>
+            </div>
+            <div class="pt_24 pd_24 txt_03">
+                임시 텍스트입니다. 공무원의 신분과 정치적 중립성은 법률이 정하는 바에 의하여 보장된다. 국가안전보장에 관련되는 대외정책·군사정책과 국내정책의 수립에 관하여
+                국무회의의 심의에 앞서 대통령의 자문에 응하기 위하여 국가안전보장회의를 둔다.
+                대통령은 내란 또는 외환의 죄를 범한 경우를 제외하고는 재직중 형사상의 소추를 받지 아니한다. 형사상의 소추를 받지 아니한다.
+            </div>
+
+            <!--
+            <div id="enter_exhi_box" class="bc_F9F9F9 fs_14 c_828282">
+                <div class="fw_600" style="margin-bottom : 16px;">작품 위치를 확인하여 방문하세요.</div>
+                <button class="bl_shareBtn">
+                    <div>
+                        <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_pos.svg" class="img-fluid">
+                        <span class="bl_btnText">작품 위치 보기</span>
+                    </div>
+                </button>
+            </div>
+            -->
+        </div>
+
+
+    </div>
+
+</div>
+
+<section class="popup">
+    <div id="recomm_login" class="popup_content">
+        <div id="recomm_login_close" class="close" onclick='popupClose()'>
+            <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_close.png">
+        </div>
+        <div class="addTxt" style="padding-top:50px">로그인이 필요한 서비스입니다.</div>
+        <div class="txt_03" style="padding-top:30px">OKNP에 로그인,<br>또는 회원가입을 진행해 주세요.</div>
+        <button onclick="" class="bl_shareBtn" style="color:white; margin-top:50px" onclick="goToLogin()">시작하기</button>
+    </div>
+</section>
+
+
+<script>
+    $(()=>{
+        $('#header').after($('.popup'));        
+    });
+
+    let cnt = 1;
+    
+    function imgToggle() {
+        $('.popup').addClass('show').fadeIn();
+
+        let img1 = document.getElementById("img1");
+        let img = document.getElementById("img2");
+        if (cnt % 2 == 1) {
+            img1.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Vector.png"
+            img2.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Inactive.png"
+        } else {
+            img1.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Inactive.png"
+            img2.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Vector.png"
+        }
+        cnt++;
+    };
+
+    const toShare = ()=> {
+        if(window.vuplex){
+            window.vuplex?.postMessage(JSON.stringify({
+                "sender" : "js",
+                "sendTime" : vu.getNowStringWithTimezone(),
+                "eventType" : "share",
+                "eventCode" : 10007,
+                "eventData" : ""
+            }));
+        }else{
+            alert('공유를 지원하지 않는 환경입니다.');                    
+        }
+    };
+
+
+    const vpsButton = () => {
+        console.log(10002);
+        
+        window.vuplex.postMessage(JSON.stringify({
+            "sender" : "js",
+            "sendTime" : vu.getNowStringWithTimezone(),
+            "eventType" : "vps",
+            "eventCode" : 10002,
+            "eventData" : "https://gana_test.olly.kr/mission/item.fileDown.nx?code=932261&s=0x0" // 넥스트비즈 폼에 설정된 이미지 URL            
+        }));
+    };
+
+    let isPlayed =false;
+
+    const playButton = () => {
+        if(!isPlayed){
+            isPlayed =true;
+            const $art = $('#art');
+        
+            const $iframe = $('<iframe>').addClass('vimeo_box video').attr({
+                src : "https://player.vimeo.com/video/762271043?h=7804dc22f2",
+                width : 320,
+                height : 180,
+                frameborder : 0,
+                allow : "autoplay; fullscreen; picture-in-picture",
+                allowfullscreen : true
+            });
+            $('#enter_exhi_box').before($iframe);
+        }
+    }
+
+
+    const popupClose = () => {
+        $('.popup').fadeOut();
+    }
+
+    const goToLoginButton = () => {
+        console.log('goToLogin');
+    }    
+</script>

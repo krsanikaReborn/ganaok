@@ -1,0 +1,362 @@
+<meta charset="utf-8">
+<!--
+<meta name="viewport" content="width=360, initial-scale=1, maximum-scale=1">
+-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://ganaart.s3.ap-northeast-2.amazonaws.com/common.css">
+<link rel="stylesheet" href="https://ganaart.s3.ap-northeast-2.amazonaws.com/override_qna.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<style>
+    * {
+        outline : none;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        /*
+        user-select: none;
+        -webkit-touch-callout: none;
+        */
+    }
+    
+    
+    a {
+        color: #212529 !important;
+        text-decoration: none !important;
+        text-decoration-line : none !important;
+    }
+
+    body{
+        width : 360px;
+        transform-origin: 0 0;
+        transform : scale(1);
+        margin : 0 !important;
+    }
+    
+    button{
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    button:focus{
+        outline : none !important;
+    }
+    .meditor_outer.ofH > .col{
+        padding-left : 0px;
+        padding-right : 0px;
+    } 
+
+
+    .preview-btm1{
+        display: none!important;
+    }
+    .log_on {
+        display: none;
+    }
+    
+    #header{
+        position : fixed;
+        top : 0;
+        left : 0;
+        right : 0;
+        height : 86px;
+        z-index : 10;
+        background : white;
+        text-align: center;
+        padding-top : 50px;
+        padding-bottom : 20px;
+        padding-left : 14px;
+        padding-right : 14px;
+        font-size : 14px;
+        display : flex;
+        justify-content: space-between;
+    }
+
+    #header .icons {
+        display: inline-block;
+        width : 17px;
+        height : 18px;
+        background-size : cover;
+    }
+
+    #header .icons:first-child{
+        margin-left : 6px;
+    }
+
+    #header .icons:last-child{
+        margin-right : 6px;
+    }
+
+    #icon_back{
+        background-image : url("https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_prev.png");      
+    }
+
+    #icon_set{
+        background-image : url("https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_set.svg");      
+    }
+    
+    .pt_66{
+        padding-top : 66px;
+    }
+
+    .mt_90{
+        margin-top : 90px;
+    }
+    
+    footer{
+        position: fixed; 
+        bottom: 0%;
+        width : 100%;      
+        background : white;
+        z-index : 10;
+    }
+    .h_80{
+        height : 80px;
+    }
+    .align_cen {
+        align-items: center;
+    }
+    .soldout{
+        width: 100%;
+        height: 20px;
+        position: absolute;
+        top: 80px;
+        display : flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(51, 51, 51, 0.5);
+        color: white;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        letter-spacing: 0.01em;
+    }
+</style>
+
+<script>
+$(()=>{
+    //과거, 현재url정리. 같으면 메인2중클릭으로 전제.
+    if(util.checkSamePage()){
+        console.log('Same Page');
+        user.check();
+    }else{
+        window.addEventListener('vuplexready', user.check);
+    }     
+    
+
+});
+
+    
+var user = {
+    id : null,
+    name : null,
+    notLoginTimer : null, 
+    loginpr : null,
+
+    check : ()=>{
+        console.log('isLoginCOOKIE : '+util.getCookie('isLogin'), util.getSessionId());
+        //2초안에 login안올경우(비회원이 웹뷰 켰을때)엔 로딩 꺼트림.
+        user.notLoginTimer = setTimeout(()=>{
+            console.log('timer Fired.');
+            util.setCookie('isLogin') == 'N';
+            vu.send('loadingEnd', 10009, '');
+        }, 2000);
+
+        //쿠키검증
+        if(util.getCookie('isLogin') === "Y"){
+            console.log('already Logined.');
+        }else{
+            console.log('user.login waiting..');
+        }
+
+    },
+
+    login : (nxId, nxLoginKey, ssId)=>{
+        var pr = new Promise();
+
+        //기다리는동안 오면 타임아웃 취소        
+        clearTimeout(user.notLoginTimer);
+
+
+        console.log("LOGIN PROCESS START : ", nxId, nxLoginKey, ssId);
+        //주어진 정보로 통신 시작.
+        return axios.post("/app/web.loginProc.nx", {
+            nx_keychain : util.keychain,
+            nx_id : nxId,
+            nx_loginKey : nxLoginKey,
+        }).then(r=>{
+            console.log("LOGIN PROC Result : "+JSON.stringify(r.data));
+            if(r.data.result == 1){
+                //세팅
+                axios.post("/app/web.session.nx", {
+                    nx_keychain : util.keychain,
+                    nx_SESS_ID : ssId,
+                }).then(sr=>{
+                    console.log("USER INFO : "+JSON.stringify(sr.data));
+                    util.setCookie('app_session', ssId);
+                    util.setCookie('id', sr.data.ID);
+                    util.setCookie('name', sr.data.NAME);
+                    util.setCookie('isLogin', 'Y');
+                    //유니티에 알려주기
+                    vu.send('login', 10003, '', sr.data.ID, ssId,);
+                    
+                    //메인, 마이페이지 갈아끼우기
+                    user.id = util.getCookie('id');
+                    user.name = util.getCookie('name');
+                    $('#username').html(user.name);
+                    $('.log_off').hide();
+                    $('.log_on').show();
+
+                    //페이지변경후 1초뒤 로딩해제
+                    setTimeout(()=>{
+                        vu.send('loadingEnd', 10009, '');
+                    }, 1000);
+                    pr.resolve();
+ 
+                }).catch(error=>{
+                    console.log("web.session.error.status", JSON.stringify(error));
+                    pr.reject();
+                    /*
+                    console.log("web.session.error.status", error.response.status);
+                    console.log("web.session.error.headers", error.response.headers);
+                    console.log("web.session.error.data", error.response.data);
+                    */
+                })
+            }else{                
+                console.log('Web Session API failed.', JSON.stringify(r));
+                //로그인 실패시 유니티에 알려주기
+                vu.send('login', 10003, false, sr.data.ID, ssId);
+                pr.reject();
+            }
+
+        }).catch(error=>{
+            console.log('web LoginProc ERROR :', JSON.stringify(error));
+            pr.reject();
+            /*
+            console.log(error.response.status);
+            console.log(error.response.headers);
+            console.log(error.response.data);
+            */
+        })
+        
+        return pr;
+    },
+
+    logout : () => {
+        try{
+            util.setCookie('web_LOGIN_YN', 'N');
+            util.setCookie('isLogin', 'N')
+            util.deleteCookie('id');
+            util.deleteCookie('name');            
+            util.deleteCookie('app_session');
+            window.localStorage.clear();
+            console.log("LOGOUT", document.cookie);
+            vu.send('logout', 10008, "");        
+        }catch(error){
+            console.log("logout error : "+error);
+        }
+        
+    },
+
+    toShare : () => {
+        if(window.vuplex){
+            vu.send('share', 10007, "");
+            return true;
+        }else{
+            console.log('not support share.');                    
+            return false;
+        }
+    },
+
+    toLoginRequired : ()=> {
+        vu.send('loginRequired', 10010, "");
+    }
+
+}
+
+
+var util = {
+    keychain : "6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v",
+    nowUrl : null,
+    oldUrl : null,
+
+    checkSamePage : () => {
+        util.nowUrl = location.href;
+        util.oldUrl = getCookie('nowUrl');
+        util.setCookie('nowUrl', util.nowUrl);
+        util.setCookie('oldUrl', util.oldUrl == undefined ? util.nowUrl : util.oldurl );
+        if(util.nowUrl == util.oldUrl){
+            return true;
+        }else{
+            return false;
+        }
+    },
+
+    getFromApi : async (url, param) => {
+        let data = { "nx_keychain" : util.keychain}
+        Object.assign(data, param);
+        console.log(JSON.stringify(data));
+        return await axios({
+            method : 'post',
+            url : location.origin+url,
+            data : JSON.stringify(data),
+        }).then(r => {
+            console.log("GET API :", r);
+            if (!r.data.result) {
+                console.error(r.data.msg);
+                return false;
+            }
+            return r.data;
+        });
+    },
+    getParamFromUrl : (key) => {
+        let search = location.search.substring(1);
+        let object = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+        let param = object[key];
+        return param;
+    },
+
+    getSessionId : () => {
+        if(document.cookie.match('app_session=([^;]*)')){
+            return document.cookie.match('app_session=([^;]*)')[1];
+        }else{
+            return false;
+        } 
+    },
+
+    imgTo100 : (url) => {
+        return url.replace('0x0', '100x100');
+    },
+
+    setCookie : (cName, cValue, cDay) =>{
+        var expire = new Date();
+        expire.setDate(expire.getDate() + cDay);
+        cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
+        if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+        document.cookie = cookies;
+    },
+
+    getCookie : (cName) => {
+        cName = cName + '=';
+        var cookieData = document.cookie;
+        var start = cookieData.indexOf(cName);
+        var cValue = '';
+        if(start != -1){
+            start += cName.length;
+            var end = cookieData.indexOf(';', start);
+            if(end == -1)end = cookieData.length;
+            cValue = cookieData.substring(start, end);
+        }
+        return unescape(cValue);
+    },
+
+    //쿠키삭제
+    deleteCookie : (cName) => {
+        util.setCookie(cName, '');
+    }
+}
+
+</script>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>OKNP</title>
+        <meta property="og:title" content="OKNP">
+        <meta property="og:url" content="">
+        <meta property="og:description" content="">
+        <meta property="og:image" content="">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+        <link rel="stylesheet" href="https://ganaart.s3.ap-northeast-2.amazonaws.com/common.css">
+    </head>
+    <style>
+#share_page{
+    width : 600px;
+    margin : 0 auto;
+    position: relative;
+}
+#art_area{
+
+}
+#art{
+
+}
+    </style>
+    <body>
+        <section id="share_page">
+            <img src="">
+            <div id="art_area">
+                <img id="art" src="">    
+            </div>
+            <div class="add fade show" id="myadd">
+                <div class="add-dialog">
+                    <div id="art_title" class="addTxt"></div>
+                    <div class="fs_14 mt_8 fw_500">
+                        <span id="author_name"></span> | <span id="author_name_eng"></span>
+                    </div>
+                    <div class="fs_14 fw_600 c_4F4F4F pt_20 pb_4">Note.</div>
+                    <div class="bc_F9F9F9 p_8_12 fs_14 c_828282">
+                        <div class="dp_f">
+                            <div class="fw_600 w_50 mr_16">size</div>
+                            <div id="size" class="fw_400"></div>
+                        </div>
+                        <div class="dp_f">
+                            <div class="fw_600 w_50 mr_16">기법</div>
+                            <div id="technic" class="fw_400"></div>
+                        </div>
+                        <div class="dp_f">
+                            <div class="fw_600 w_50 mr_16">제작년도</div>
+                            <div id="year" class="fw_400"></div>
+                        </div>
+                    </div>    
+                    <div id="description" class="pt_24 txt_03">
+                    </div>            
+                </div>
+            </div>            
+            
+        </section>
+
+    </body>
+    <script>
+
+$(()=>{
+    $('#title').html(getParamFromUrl('title'));
+    $('#art').attr('src', getParamFromUrl('img'));
+    $('#author_name').html(getParamFromUrl('author'));
+    $('#author_name_eng').html(getParamFromUrl('author_eng'));
+    $('#size').html(getParamFromUrl('size'));
+    $('#technic').html(getParamFromUrl('technic'));
+    $('#year').html(getParamFromUrl('year'));
+    $('#description').html(getParamFromUrl('description'));
+});
+
+const getParamFromUrl = (key) => {
+        let search = location.search.substring(1);
+        let object = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+        let param = object[key];
+//        object.find(e=> e.id == q)
+        return param;
+};   
+
+    </script>
+</html>

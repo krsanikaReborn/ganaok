@@ -1,0 +1,592 @@
+{
+	"info": {
+		"_postman_id": "628a0007-1fe0-4037-a190-9b084c9a28f0",
+		"name": "가나오케이",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20119897"
+	},
+	"item": [
+		{
+			"name": "전시관 전체",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\"\r\n    \r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.master.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.master.nx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "전시관 하나만",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n    \"use_sub\" : \"Y\",\r\n    \"code\" : \"inb4ubqw\"\r\n    \r\n\r\n}"
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.master.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.master.nx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "가나전시관 내부 방 정보.",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n \"master_idx\" : 3\r\n}"
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.sub.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.sub.nx"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://gana_test.olly.kr/app/mission.sub.nx",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n \"master_idx\" : 3\r\n}"
+						},
+						"url": {
+							"raw": "https://gana_test.olly.kr/app/mission.sub.nx",
+							"protocol": "https",
+							"host": [
+								"gana_test",
+								"olly",
+								"kr"
+							],
+							"path": [
+								"app",
+								"mission.sub.nx"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 07:20:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000; includeSubdomains; preload"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"msg\": \"\",\n    \"items\": [\n        {\n            \"no\": 1,\n            \"idx\": 3,\n            \"arr_num\": 0,\n            \"ms_title\": \"Room4\",\n            \"ms_sdate\": \"2022-09-14 17:20\",\n            \"ms_edate\": \"2022-09-14 17:20\",\n            \"ms_use_yn\": \"사용\",\n            \"ms_item\": []\n        }\n    ],\n    \"tot\": \"1\",\n    \"topa\": 1,\n    \"page\": 1,\n    \"pa\": 15\n}"
+				}
+			]
+		},
+		{
+			"name": "그림 리스트",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.item.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.item.nx"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://gana_test.olly.kr/app/mission.item.nx",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n \"sub_idx\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gana_test.olly.kr/app/mission.item.nx",
+							"protocol": "https",
+							"host": [
+								"gana_test",
+								"olly",
+								"kr"
+							],
+							"path": [
+								"app",
+								"mission.item.nx"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 07:21:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000; includeSubdomains; preload"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"msg\": \"\",\n    \"items\": [\n        {\n            \"no\": 1,\n            \"idx\": 1,\n            \"arr_num\": 0,\n            \"img\": \"<img src=\\\"item.fileDown.nx?code=914247&s=0x0\\\" alt=\\\"\\\" width=\\\"60\\\" class=\\\"dsB\\\" />\",\n            \"mi_title\": \"빈센트 반 고흐\",\n            \"mi_code\": \"eu5a1hno\",\n            \"mi_use_yn\": \"미사용\",\n            \"form\": []\n        }\n    ],\n    \"tot\": \"1\",\n    \"topa\": 1,\n    \"page\": 1,\n    \"pa\": 15\n}"
+				}
+			]
+		},
+		{
+			"name": "그림 리스트 특정작가만",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.item.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.item.nx"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://gana_test.olly.kr/app/mission.item.nx",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n \"sub_idx\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gana_test.olly.kr/app/mission.item.nx",
+							"protocol": "https",
+							"host": [
+								"gana_test",
+								"olly",
+								"kr"
+							],
+							"path": [
+								"app",
+								"mission.item.nx"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 07:21:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000; includeSubdomains; preload"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"msg\": \"\",\n    \"items\": [\n        {\n            \"no\": 1,\n            \"idx\": 1,\n            \"arr_num\": 0,\n            \"img\": \"<img src=\\\"item.fileDown.nx?code=914247&s=0x0\\\" alt=\\\"\\\" width=\\\"60\\\" class=\\\"dsB\\\" />\",\n            \"mi_title\": \"빈센트 반 고흐\",\n            \"mi_code\": \"eu5a1hno\",\n            \"mi_use_yn\": \"미사용\",\n            \"form\": []\n        }\n    ],\n    \"tot\": \"1\",\n    \"topa\": 1,\n    \"page\": 1,\n    \"pa\": 15\n}"
+				}
+			]
+		},
+		{
+			"name": "그림 하나만",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n    \"code\" : \"l99h9dan\",\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.item.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.item.nx"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://gana_test.olly.kr/app/mission.item.nx",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n \"sub_idx\" : 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gana_test.olly.kr/app/mission.item.nx",
+							"protocol": "https",
+							"host": [
+								"gana_test",
+								"olly",
+								"kr"
+							],
+							"path": [
+								"app",
+								"mission.item.nx"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 07:21:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000; includeSubdomains; preload"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"msg\": \"\",\n    \"items\": [\n        {\n            \"no\": 1,\n            \"idx\": 1,\n            \"arr_num\": 0,\n            \"img\": \"<img src=\\\"item.fileDown.nx?code=914247&s=0x0\\\" alt=\\\"\\\" width=\\\"60\\\" class=\\\"dsB\\\" />\",\n            \"mi_title\": \"빈센트 반 고흐\",\n            \"mi_code\": \"eu5a1hno\",\n            \"mi_use_yn\": \"미사용\",\n            \"form\": []\n        }\n    ],\n    \"tot\": \"1\",\n    \"topa\": 1,\n    \"page\": 1,\n    \"pa\": 15\n}"
+				}
+			]
+		},
+		{
+			"name": "작가 전체",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\"\r\n}"
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.author.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.author.nx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "작가 한명만",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nx_keychain\" : \"6d8sobk3fcy2gd49hx2r6uk3kwdp7u5d7d5wpq043z7jcbsu9v\",\r\n    \"code\" : \"xmey11hr\"\r\n}"
+				},
+				"url": {
+					"raw": "https://gana_test.olly.kr/app/mission.author.nx",
+					"protocol": "https",
+					"host": [
+						"gana_test",
+						"olly",
+						"kr"
+					],
+					"path": [
+						"app",
+						"mission.author.nx"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

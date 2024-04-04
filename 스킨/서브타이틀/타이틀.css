@@ -1,0 +1,46 @@
+    
+    #header{
+        position : fixed;
+        top : 0;
+        left : 0;
+        right : 0;
+        height : 86px;
+        z-index : 10;
+        background : white;
+        text-align: center;
+        padding-top : 50px;
+        padding-bottom : 20px;
+        padding-left : 14px;
+        padding-right : 14px;
+        font-size : 14px;
+        display : flex;
+        justify-content: space-between;
+    }
+
+    #header .icons {
+        display: inline-block;
+        width : 17px;
+        height : 18px;
+        background-size : cover;
+    }
+
+    #header .icons:first-child{
+        margin-left : 6px;
+    }
+
+    #header .icons:last-child{
+        margin-right : 6px;
+    }
+
+    #icon_back{
+        background-image : url("https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_prev.png");      
+    }
+
+    #icon_set{
+        background-image : url("https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_set.svg");      
+    }
+    
+
+    #title_under_space{
+        margin-top : 90px;
+    }

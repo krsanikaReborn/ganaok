@@ -1,0 +1,373 @@
+<link rel="stylesheet" href="https://ganaart.s3.ap-northeast-2.amazonaws.com/common.css">
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<style>
+
+.po_re {
+    position: relative;
+    top: -2px;
+}
+.add-content {
+   border: 0!important;
+}
+
+.add-header {
+   border-bottom: 0!important;
+}
+
+.add-dialog {
+   margin: 0!important;
+}
+.txt_01 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_02 {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    width: 110px;
+    margin: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.txt_03 {
+    font-size: 14px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+}
+
+#exhi_image_area {
+    width: 100%;
+    min-height : 560px;
+    background-size: cover;
+}
+
+#content_box{
+    width : 100%;
+    padding : 25px 20px;
+}
+
+.addTtl {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #121212;
+}
+
+.add-content {
+    border-radius: 16px;
+    border: unset;
+}
+
+.add-header .close {
+    margin: -1rem;
+}
+
+.add-header .add_margin {
+    padding: 1rem 1rem;
+    margin-top: -42px;
+}
+
+.add-header {
+    padding: 21px 1rem;
+    border-bottom: unset;
+}
+
+.add-body {
+    background: #F9F9F9;
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.add-body > div:first-child {
+    padding : 48px;
+}
+
+.add-body > div:first-child > img {
+    box-shadow: 2px 12px 24px 0px #16161640;
+}
+.add-dialog {
+    max-width: 1000px;
+    margin: 0;
+}
+
+.p_48 {
+    padding: 48px 0;
+}
+
+.ic_ar {
+    text-align: right;
+    margin-top: -90px;
+    margin-right: 30px;
+}
+
+.ic_bar {
+    padding: 18px 30px 18px 0;
+}
+.img_txt {
+    position: fixed;
+    color: #fff;
+    padding-top: 410px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.img_txt02 {
+    text-align: center;
+    background: #EE5529;
+    width: 60px;
+    font-size: 10px;
+}
+
+.img_txt03 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.img_txt04 {
+    font-size: 14px;
+    font-weight: 500;
+}
+.addTxt {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    color: #333;
+}
+
+
+.bc_F9F9F9 {
+    background: #F9F9F9;
+}
+.square_swiper .swiper-slide {
+    width: 100px;
+}
+
+.square_swiper .swiper-slide img {
+    height: 100px;
+}
+
+.pd_20_0{
+    padding : 20px 0px;
+}
+
+.txt_04 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    text-align: left;
+    width: 90px;
+    min-height: 50px;
+    max-height: 33.6px;    
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis; 
+}
+
+.txt_05 {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: left;
+    width: 90px;
+    text-overflow: ellipsis;
+    min-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.hp_mb42 {
+    margin-bottom: 42px;
+}
+.bl_shareBtn {
+    width: 100%;
+    height: auto;
+    min-height: 56px;
+    text-align: center;
+    background-color: #121212;
+}
+.bl_btnText{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: #fff;
+    letter-spacing: 0.04em;
+    padding-left: 8px;
+}
+
+#enter_exhi_box{
+    text-align : center;
+    padding : 20px 12px;
+    margin-top : 20px;
+}
+
+</style>
+
+<div class="container-fluid mx-0 px-0">
+    <div style="height:560px;">
+        <div id='exhi_image_area' class="col fs_14 px-0" style="background-image : url(https://ganaart.s3.ap-northeast-2.amazonaws.com/activeNotext.png)"></div>
+        <div class="img_txt">
+            <div class="img_txt02 mb_4">On going</div>
+            <div class="img_txt03">김철수 특별전</div>
+            <div class="img_txt03 mb_4">특별 전시회</div>
+            <div class="img_txt04">2022. 08. 18 - 24</div>
+        </div>
+    </div>
+    <div id="content_box">
+        <div class="txt_r dp_f jc_e">
+            <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_share.svg" class="img-fluid pr_10 c_pointer">
+        </div>        
+        <div class="add-dialog">
+            <div class="addTxt">
+                    Un Passage No.221028, 130x162cm, Acrylic on Canvas, 2022
+            </div>
+            <div class="fs_14 mt_8 fw_500">
+                <span>하태임</span>
+            </div>
+ 
+        <div class="pd_20_0 txt_03">
+            전시상세세세세세
+            임시 텍스트입니다. 공무원의 신분과 정치적 중립성은 법률이 정하는 바에 의하여 보장된다. 국가안전보장에 관련되는 대외정책·군사정책과 국내정책의 수립에 관하여
+            국무회의의 심의에 앞서 대통령의 자문에 응하기 위하여 국가안전보장회의를 둔다.
+            대통령은 내란 또는 외환의 죄를 범한 경우를 제외하고는 재직중 형사상의 소추를 받지 아니한다. 형사상의 소추를 받지 아니한다.
+        </div>
+
+        <div class="row pd_20_0">
+            <div class="col fs_14 dp_f jc_b">
+                <div>
+                    <strong>전시 중인 작품</strong>
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/Line 5.png" class="img-fluid mb_4 mr_8 ml_8">
+                    <span class="c_828282">CURRENTLY</span>
+                </div>
+                <div>
+                    <a href="/page/?M2_IDX=27161">
+                        <span class="c_828282 fs_12">더보기</span>
+                        <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/btn_nxt.png" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div id="currently_swiper" class="swiper square_swiper pl_5px">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="txt_c">
+                            <a href="/page/?M2_IDX=26686">
+                                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/dummy/Un+Passage+No.221028%2C+130x162cm%2C+Acrylic+on+Canvas%2C+2022.jpg" class="img-fluid">
+                                <div class="txt_04 pt_14 ">Un Passage No.221028</div>
+                                <div class="txt_05 c_828282 pt_2">하태임</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="txt_c">
+                            <a href="/page/?M2_IDX=26686">
+                                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/dummy/Un+Passage+No.224051%2C+90x90cm%2C+Acrylic+on+Canvas%2C+2022.jpg" class="img-fluid">
+                                <div class="txt_04 pt_14 ">Un Passage No.224051</div>
+                                <div class="txt_05 c_828282 pt_2">하태임</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="txt_c">
+                            <a href="/page/?M2_IDX=26686">
+                                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/dummy/Un+Passage+No.224055%2C+70x70cm%2C+Acrylic+on+Canvas%2C+2022.jpg" class="img-fluid">
+                                <div class="txt_04 pt_14 ">Un Passage No.224055</div>
+                                <div class="txt_05 c_828282 pt_2">하태임</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="txt_c">
+                            <a href="/page/?M2_IDX=26686">
+                                <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/dummy/Un+Passage+No.224066%2C+70x70cm%2C+Acrylic+on+Canvas%2C+2022.jpg" class="img-fluid">
+                                <div class="txt_04 pt_14 ">Un Passage No.224066</div>
+                                <div class="txt_05 c_828282 pt_2">하태임</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+
+        <div id="enter_exhi_box" class="bc_F9F9F9 fs_14 c_828282">
+            <div class="fw_600" style="margin-bottom : 16px;">가상 전시관에 입장해 추첨권을 획득하세요.</div>
+            <button class="bl_shareBtn">
+                <div onclick="enterArHall()">
+                    <img src="https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_enter.svg" class="img-fluid">
+                    <span class="bl_btnText">가상 전시 입장</span>
+                </div>
+            </button>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<script>
+    let cnt = 1;
+
+    var smallSwipers = new Swiper("#currently_swiper", {
+            allowTouchMove : true,
+            slidesPerView: 'auto',
+            spaceBetween: 14,
+        });
+
+
+    function imgToggle() {
+        let img1 = document.getElementById("img1");
+        let img = document.getElementById("img2");
+
+        if (cnt % 2 == 1) {
+            img1.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Vector.png"
+            img2.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Inactive.png"
+        } else {
+            img1.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Inactive.png"
+            img2.src = "https://ganaart.s3.ap-northeast-2.amazonaws.com/ic_Vector.png"
+        }
+        cnt++;
+    }
+
+    const vpsButton = () => {
+        console.log(10002);
+        
+        window.vuplex.postMessage(JSON.stringify({
+            "sender" : "js",
+            "sendTime" : vu.getNowStringWithTimezone(),
+            "eventType" : "vps",
+            "eventCode" : 10002,
+            "eventData" : "https://gana_test.olly.kr/mission/item.fileDown.nx?code=932261&s=0x0" // 넥스트비즈 폼에 설정된 이미지 URL            
+        }));
+    }
+
+    const enterArHall = () => {
+            //나중에 고침
+            code = "room1";
+            window.vuplex.postMessage(JSON.stringify({
+                "sender" : "js",
+                "sendTime" : vu.getNowStringWithTimezone(),
+                "eventType" : "arshowroom",
+                "eventCode" : 10004,
+                "eventData" : code
+            }));                
+    }
+    아이콘 클릭 영역 수정
+    아아이dsf콘 클릭 영역 수정이콘 클릭 영역 수정</script>
